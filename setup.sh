@@ -6,4 +6,4 @@ rm -rf lib/!(README.md)
 pip install -r requirements.txt -t lib/
 
 # Clear anything in the private/ directory
-rm -rf lib/!(README.md|__init__.py)
+rm -rf private/!(README.md|__init__.py)
