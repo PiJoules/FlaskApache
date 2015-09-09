@@ -1,8 +1,10 @@
 # Setting up a Flask Application on Apache
-Instructions on how to setup a flask application on an existing apache server. For an existing apache server, you will just need to proxy HTTP traffic through apache to your flask app. This way, apache can handle the static files (which it's very good at - much better than the debug server built into Flask) and act as a reverse proxy for your dynamic content, passing those requests to Flask.
+These are instructions on how to setup a flask application on an existing apache server. For an existing apache server, you will just need to proxy HTTP traffic through apache to your flask app. This way, apache can handle the static files (which it's very good at - much better than the debug server built into Flask) and act as a reverse proxy for your dynamic content, passing those requests to Flask.
+
+Also included are instructions on how to run multiple applications on the same server. With this, you can support subdomains on your website, and be able to get the most of your VPN without having to use one VPN for each application you would like to deploy.
 
 ## Dependencies
-These instructions asume you are on a `Linux` OS on a `Bash` shell. These instructions also assume you have `python`, `git`, `vim` (or some other text editor), and `apache2` installed.
+These instructions asume you are on a `Linux` OS using a `Bash` shell. These instructions also assume you have `python`, `git`, `vim` (or some other text editor), and `apache2` installed.
 
 Other dependecies will be installed while running these instructions. I do not assume you have these installed beforehand because these new ones are not required for running the default apache server. This repo also contains a sample Flask application that will be used in this example.
 
@@ -135,8 +137,21 @@ $ pip install -r requirements.txt -t lib/ # do this inside the nested FlaskApach
 At this point, you can go to the IP/URL specified in the `ServerName` property and you see your flask application deployed.
 
 
+## Running Multiple Applications on the same Apache Server
+To run another Flask application on the same server, you just need to repeat the above steps but replacing every instance of the path to your first app with your path to the second app. For example, you can duplicate the directory containing the parent `FlaskApache` in the same directory it's in, but rename it `FlaskApache2`. You would then adjust the path inside the `FlaskApache2/FlaskApache.wsgi` file by replacing it with this file path, and add another `.conf` file in the `/etc/apache2/sites-available/` directory similar to the first one, but adjusting the paths appropriately and replacing the server name whith whatever the name of the domain of your application is. If you would like to have a subdomain `eggs.FlashApache.com`, you would place `eggs.FlaskApache.com` in the server name.
+
+Lastly, to run the application, you need to enable it and restart the server:
+```sh
+$ sudo a2ensite FlaskApache # enable
+$ sudo service apache2 restart # restart
+```
+
+
 ## Closing Stuff
 - For your application, just be sure to replace all instances of `FlaskApache` with whatever name you want for your app.
 - You may notice the `setup.sh` file in this repo. This just essentially replaces whatever is in the `lib/` directory with any new dependencies added or removed from the `requirements.txt` file. This can be run with `source setup.sh`.
 
 
+## Sources
+- [How To Deploy a Flask Application on an Ubuntu VPS](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+- [How to Host Multiple Flask Apps on Digital Ocean](https://www.reddit.com/r/flask/comments/2v39a3/how_to_host_multiple_flask_apps_on_digital_ocean/)
