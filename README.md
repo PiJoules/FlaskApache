@@ -146,6 +146,8 @@ $ sudo a2ensite FlaskApache # enable
 $ sudo service apache2 restart # restart
 ```
 
+You will also need to add a new `A` record with your DNS where the name of the record is the subdomain name.
+
 
 ## Closing Stuff
 - For your application, just be sure to replace all instances of `FlaskApache` with whatever name you want for your app.
