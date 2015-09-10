@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 # Root directory
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
 	return render_template("index.html")
 
