@@ -38,9 +38,6 @@ FlaskApache
     ├── __init__.py
     ├── lib
     │   └── README.md
-    ├── private
-    │   ├── __init__.py
-    │   └── README.md
     ├── README.md
     ├── requirements.txt
     ├── setup.sh
@@ -70,9 +67,6 @@ FlaskApache
 ├── FlaskApache
 │   ├── __init__.py
 │   ├── lib
-│   │   └── README.md
-│   ├── private
-│   │   ├── __init__.py
 │   │   └── README.md
 │   ├── README.md
 │   ├── requirements.txt
